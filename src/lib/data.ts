@@ -97,7 +97,7 @@ export const projects: Project[] = [
     title: "CredChain",
     description: "Blockchain-based credential issuance and verification system for academic institutions, preventing certificate fraud through immutable on-chain records.",
     tags: ["Solidity","Web3.js","Express","MongoDB"],
-    github: "https://github.com/Devvvv2112 /Credchain",
+    github: "https://github.com/Devvvv2112/Credchain",
     live: "",
     images: ["/projects/credchain-1.png", "/projects/credchain-2.png", "/projects/credchain-3.png", "/projects/credchain-4.png"
 
