@@ -13,7 +13,7 @@ function Slider({ title, images }: { title: string; images: string[] }) {
     <div className="group relative aspect-[16/10] w-full overflow-hidden border-b border-line">
       <AnimatePresence initial={false} mode="wait">
         <motion.div key={idx} initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }} transition={{ duration:0.3 }} className="absolute inset-0">
-          <Image src={imgs[idx]} alt={`${title} screenshot ${idx + 1}`} fill className="object-cover" sizes="(max-width:640px) 100vw, 50vw" />
+          <Image src={imgs[idx]} alt={`${title} screenshot ${idx + 1}`} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width:640px) 100vw, 50vw" />
         </motion.div>
       </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
@@ -41,7 +41,7 @@ export default function Projects() {
   return (
     <section id="projects" className="border-t border-line/40 mx-auto max-w-6xl px-6 py-24 md:py-32">
       <motion.div initial={{ opacity:0,y:16 }} whileInView={{ opacity:1,y:0 }} viewport={{ once:true,margin:"-80px" }} transition={{ duration:0.5 }} className="mb-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-mint mb-3">Block #04</p>
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-mint mb-3"><span className="text-muted">// </span>Block #04</p>
         <h2 className="font-display text-4xl font-semibold text-paper md:text-5xl">Projects</h2>
         <p className="mt-3 text-muted">Things I have built from smart contracts to full-stack apps.</p>
       </motion.div>

@@ -15,7 +15,7 @@ export default function Contact() {
   return (
     <section id="contact" className="border-t border-line/40 mx-auto max-w-6xl px-6 py-24 md:py-32">
       <motion.div initial={{ opacity:0,y:16 }} whileInView={{ opacity:1,y:0 }} viewport={{ once:true,margin:"-80px" }} transition={{ duration:0.5 }} className="mb-12">
-        <p className="font-mono text-xs uppercase tracking-[0.25em] text-mint mb-3">Block #06</p>
+        <p className="font-mono text-xs uppercase tracking-[0.25em] text-mint mb-3"><span className="text-muted">// </span>Block #06</p>
         <h2 className="font-display text-4xl font-semibold text-paper md:text-5xl">Contact</h2>
         <p className="mt-3 text-muted">Open to internships, collaborations, and interesting Web3 conversations.</p>
       </motion.div>

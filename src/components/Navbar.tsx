@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, FileText, Twitter } from "lucide-react";
 import { profile, socials } from "@/lib/data";
@@ -12,7 +13,31 @@ const links = [
   { href: "#contact", label: "Contact" },
 ];
 
+function useActiveSection() {
+  const [active, setActive] = useState("");
+  useEffect(() => {
+    const ids = links.map((l) => l.href.slice(1));
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible[0]) setActive(`#${visible[0].target.id}`);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.25, 0.5, 1] }
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+  return active;
+}
+
 export default function Navbar() {
+  const active = useActiveSection();
   return (
     <motion.header
       initial={{ y: -60, opacity: 0 }}
@@ -25,12 +50,15 @@ export default function Navbar() {
           {"<"}{profile.name}{"/>"}
         </a>
         <nav className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.15em] text-muted md:flex">
-          {links.map((l) => (
-            <a key={l.href} href={l.href} className="hover:text-mint transition-colors relative group">
-              {l.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-mint transition-all group-hover:w-full" />
-            </a>
-          ))}
+          {links.map((l) => {
+            const isActive = active === l.href;
+            return (
+              <a key={l.href} href={l.href} className={`transition-colors relative group ${isActive ? "text-mint" : "hover:text-mint"}`}>
+                {l.label}
+                <span className={`absolute -bottom-1 left-0 h-px bg-mint transition-all ${isActive ? "w-full" : "w-0 group-hover:w-full"}`} />
+              </a>
+            );
+          })}
         </nav>
         <div className="flex items-center gap-4 text-muted">
           <a href={socials.github} target="_blank" rel="noreferrer" className="hover:text-mint transition-colors"><Github size={17} /></a>
